@@ -38,16 +38,11 @@ namespace _2
                     b = 0;
                     Console.Write("輸入 4 個數字： ");
                     player = Console.ReadLine();
-                    for (int i = 0; i < player.Length; i++)
+                    var l = computer.Intersect(player);
+                    foreach (var v in l)
                     {
-                        for (int j = 0; j < computer.Length; j++)
-                        {
-                            if (player[i] == computer[j])
-                            {
-                                if (i == j) a++;
-                                else b++;
-                            }
-                        }
+                        if (computer.IndexOf(v) == player.IndexOf(v)) a++;
+                        else b++;
                     }
                     Console.WriteLine($"判定結果是 {a}A{b}B");
 
