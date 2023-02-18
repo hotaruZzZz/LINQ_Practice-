@@ -104,15 +104,26 @@ namespace _1
 
             // 17. 製作一頁 4 筆總共 5 頁的分頁選擇器
             Console.WriteLine("-----------------------------------------------------------");
-            string select;
+            string select ="";
+            while(select != "e")
+            {
+                Console.Write("請輸入想看的頁數(1~5)，退出請打「e」:");
+                select = Console.ReadLine(); //選擇想看的頁數
+                //if (select == "e") break;
+                Console.WriteLine($"第{select}頁");
+                var pageData = list.Skip((int.Parse(select) - 1) * 4).Take(4).ToList();
+                foreach (var p in pageData) Console.WriteLine($"{p.Id} {p.Name} {p.Price} {p.Quantity} {p.Type}");
+            }
             do
             {
                 Console.Write("請輸入想看的頁數(1~5)，退出請打「e」:"); 
                 select = Console.ReadLine(); //選擇想看的頁數
+                if (select == "e") break;
                 Console.WriteLine($"第{select}頁");
                 var pageData = list.Skip((int.Parse( select) - 1) * 4).Take(4).ToList();
                 foreach (var p in pageData) Console.WriteLine($"{p.Id} {p.Name} {p.Price} {p.Quantity} {p.Type}");
             } while (select != "e");
+
             Console.ReadKey();
         }
 
