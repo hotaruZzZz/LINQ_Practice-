@@ -11,15 +11,10 @@ namespace _2
         public static string guess()
         {
             Random r = new Random();
-            string c1 = r.Next(0, 10).ToString();
-            string c2 = r.Next(0, 10).ToString();
-            while (c2 == c1) c2 = r.Next(0, 10).ToString();
-            string c3 = r.Next(0, 10).ToString();
-            while (c3 == c1 || c3 == c2) c3 = r.Next(0, 10).ToString();
-            string c4 = r.Next(0, 10).ToString();
-            while (c4 == c1 || c4 == c2 || c4 == c3) c4 = r.Next(0, 10).ToString();
-            string computer = c1 + c2 + c3 + c4;
-            //Console.WriteLine(computer);
+            var guess = Enumerable.Range(0,9).OrderBy(i => r.Next()).Take(4);
+            string computer = "";
+            foreach(var i in guess) computer += i;
+            Console.WriteLine(computer);
             return computer;
         }
         static void Main(string[] args)
@@ -39,6 +34,7 @@ namespace _2
                     Console.Write("輸入 4 個數字： ");
                     player = Console.ReadLine();
                     var l = computer.Intersect(player);
+
                     foreach (var v in l)
                     {
                         if (computer.IndexOf(v) == player.IndexOf(v)) a++;
