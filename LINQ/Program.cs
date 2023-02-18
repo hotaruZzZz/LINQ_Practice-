@@ -104,25 +104,20 @@ namespace _1
 
             // 17. 製作一頁 4 筆總共 5 頁的分頁選擇器
             Console.WriteLine("-----------------------------------------------------------");
-            string select ="";
-            while(select != "e")
+            string select;
+            while (true)
             {
                 Console.Write("請輸入想看的頁數(1~5)，退出請打「e」:");
                 select = Console.ReadLine(); //選擇想看的頁數
-                //if (select == "e") break;
-                Console.WriteLine($"第{select}頁");
-                var pageData = list.Skip((int.Parse(select) - 1) * 4).Take(4).ToList();
-                foreach (var p in pageData) Console.WriteLine($"{p.Id} {p.Name} {p.Price} {p.Quantity} {p.Type}");
+                if (!int.TryParse(select, out _)) break; // 輸入不為數值則退出
+                else if (int.Parse(select) < 1 || int.Parse(select) > 5) Console.WriteLine("無此頁，請再輸入一次"); // 不在1~5之間
+                else
+                {
+                    Console.WriteLine($"第{select}頁");
+                    var pageData = list.Skip((int.Parse(select) - 1) * 4).Take(4).ToList();
+                    foreach (var p in pageData) Console.WriteLine($"{p.Id} {p.Name} {p.Price} {p.Quantity} {p.Type}");
+                }
             }
-            do
-            {
-                Console.Write("請輸入想看的頁數(1~5)，退出請打「e」:"); 
-                select = Console.ReadLine(); //選擇想看的頁數
-                if (select == "e") break;
-                Console.WriteLine($"第{select}頁");
-                var pageData = list.Skip((int.Parse( select) - 1) * 4).Take(4).ToList();
-                foreach (var p in pageData) Console.WriteLine($"{p.Id} {p.Name} {p.Price} {p.Quantity} {p.Type}");
-            } while (select != "e");
 
             Console.ReadKey();
         }
